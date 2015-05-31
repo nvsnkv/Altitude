@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:views="using:Altitude.Tracker.Views"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <Pivot Title="ALTITUDE">
+        <views:RightNowView/>
+        <views:SettingsView/>
+    </Pivot>
 </Page>

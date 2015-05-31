@@ -2,6 +2,9 @@
     x:Class="Altitude.Tracker.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Altitude.Tracker">
-
+    xmlns:local="using:Altitude.Tracker"
+    xmlns:c="using:Altitude.Tracker.Converters">
+    <Application.Resources>
+        <c:FormatConverter x:Key="FormatConverter"/>
+    </Application.Resources>
 </Application>
