@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Windows.UI.Core;
 using Altitude.Domain.Tracking;
 using Altitude.Tracker.Annotations;
@@ -43,8 +44,18 @@ namespace Altitude.Tracker.ViewModels.RightNow
         protected override async void TrackerOnStateChanged()
         {
             var state = _tracker.State;
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
+                var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+                if (state == TrackerState.Initializing)
+                {
+                    await statusBar.ProgressIndicator.ShowAsync();
+                }
+                else
+                {
+                    await statusBar.ProgressIndicator.HideAsync();
+                }
                 State = state;
             });
         }
