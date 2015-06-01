@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,6 +11,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Altitude.Tracker.Tracking;
+using Altitude.Tracker.ViewModels;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -24,9 +25,12 @@ namespace Altitude.Tracker
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            NavigationCacheMode = NavigationCacheMode.Required;
+
+            var tracker = new WPTracker();
+            DataContext = new MainViewModel(tracker, Dispatcher);
         }
 
         /// <summary>

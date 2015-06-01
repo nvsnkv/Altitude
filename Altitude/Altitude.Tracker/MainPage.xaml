@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Pivot Title="ALTITUDE">
-        <views:RightNowView/>
+        <views:RightNowView DataContext="{Binding RightNow}"/>
         <views:SettingsView/>
     </Pivot>
 </Page>

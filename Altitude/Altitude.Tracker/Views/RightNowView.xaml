@@ -62,7 +62,7 @@
             <Run Text="{Binding Tracker.State, FallbackValue=DataUnavailable}"/>
         </TextBlock>
         
-        <ToggleButton Grid.Row="6" Grid.ColumnSpan="2" IsChecked="{Binding Tracker.IsEnabled}" HorizontalAlignment="Stretch">
+        <ToggleButton Grid.Row="6" Grid.ColumnSpan="2" IsChecked="{Binding Tracker.IsEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch">
             Track
         </ToggleButton>
     </Grid>

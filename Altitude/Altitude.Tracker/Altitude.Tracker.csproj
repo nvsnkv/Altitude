@@ -82,6 +82,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\Altitude.Domain\Altitude.Domain.csproj">
+      <Project>{49692388-c67a-4566-a6c9-e7f63b6a2698}</Project>
+      <Name>Altitude.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -91,7 +95,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tracking\WPTracker.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RightNow\PositionViewModel.cs" />
+    <Compile Include="ViewModels\RightNow\RightNowViewModel.cs" />
+    <Compile Include="ViewModels\RightNow\RightNowViewModelBase.cs" />
+    <Compile Include="ViewModels\RightNow\TrackerViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\RightNowView.xaml.cs">
       <DependentUpon>RightNowView.xaml</DependentUpon>
     </Compile>
