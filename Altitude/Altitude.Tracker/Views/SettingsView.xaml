@@ -26,24 +26,34 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}">Horizontal:</TextBlock>
             <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
-                <Run Text="{Binding Accuracy.Horizontal, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:F2\}, FallbackValue=0.00}"/>
+                <Run Text="{Binding Accuracy.Horizontal, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:F1\}, FallbackValue=0.00}"/>
                 <Run> m</Run>
             </TextBlock>
-            <Slider Grid.Row="1" Grid.ColumnSpan="2"
-                Minimum="0" Maximum="50" 
+
+            <Slider Grid.Row="1" Grid.ColumnSpan="2" 
+                Minimum="0" Maximum="30" StepFrequency="0.1"
                 Value="{Binding Accuracy.Horizontal, Mode=TwoWay}" 
-                Height="10" HorizontalAlignment="Stretch"/>
+            />
+            
 
             <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}">Vertical:</TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}">
-                <Run Text="{Binding Accuracy.Vertical, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:F2\}, FallbackValue=0.00}"/>
+                <Run Text="{Binding Accuracy.Vertical, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:F1\}, FallbackValue=0.00}"/>
                 <Run> m</Run>
             </TextBlock>
             <Slider Grid.Row="3" Grid.ColumnSpan="2"
-                Minimum="0" Maximum="50" 
+                Minimum="0" Maximum="30" StepFrequency="0.1"
                 Value="{Binding Accuracy.Vertical, Mode=TwoWay}" 
-                Height="10" HorizontalAlignment="Stretch"/>
+            />
         </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding HasChanges, Converter={StaticResource BoolToVisibilityConverter}}">
+            <HyperlinkButton Visibility="{Binding HasChanges}" Command="{Binding Apply}">
+                <TextBlock Style="{StaticResource BaseTextBlockStyle}"><Underline>apply</Underline></TextBlock>
+            </HyperlinkButton>
+            <HyperlinkButton Margin="5 0" Command="{Binding Reset}">
+                <TextBlock Style="{StaticResource BaseTextBlockStyle}"><Underline>reset</Underline></TextBlock>
+            </HyperlinkButton>
+        </StackPanel>
 
         <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Storage</TextBlock>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}">

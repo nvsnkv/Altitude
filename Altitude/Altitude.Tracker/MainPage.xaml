@@ -11,6 +11,6 @@
 
     <Pivot Title="ALTITUDE">
         <views:RightNowView DataContext="{Binding RightNow}"/>
-        <views:SettingsView/>
+        <views:SettingsView DataContext="{Binding Settings}"/>
     </Pivot>
 </Page>

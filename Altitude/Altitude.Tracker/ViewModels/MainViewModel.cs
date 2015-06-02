@@ -3,6 +3,7 @@ using Windows.UI.Core;
 using Altitude.Domain.Tracking;
 using Altitude.Tracker.Annotations;
 using Altitude.Tracker.ViewModels.RightNow;
+using Altitude.Tracker.ViewModels.Settings;
 
 namespace Altitude.Tracker.ViewModels
 {
