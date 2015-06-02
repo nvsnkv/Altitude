@@ -6,8 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400"
     Header="Settings">
     
     <StackPanel>
@@ -50,7 +48,7 @@
             <HyperlinkButton Visibility="{Binding HasChanges}" Command="{Binding Apply}">
                 <TextBlock Style="{StaticResource BaseTextBlockStyle}"><Underline>apply</Underline></TextBlock>
             </HyperlinkButton>
-            <HyperlinkButton Margin="5 0" Command="{Binding Reset}">
+            <HyperlinkButton Margin="8 0" Command="{Binding Reset}">
                 <TextBlock Style="{StaticResource BaseTextBlockStyle}"><Underline>reset</Underline></TextBlock>
             </HyperlinkButton>
         </StackPanel>

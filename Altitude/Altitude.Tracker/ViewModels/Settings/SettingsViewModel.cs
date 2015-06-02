@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Altitude.Domain;
 using Altitude.Tracker.Annotations;
 using Altitude.Tracker.Commands;
@@ -17,7 +19,7 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         public SettingsViewModel([NotNull] CoreDispatcher dispatcher) : base(dispatcher)
         {
-            _initialAccuracy = new Accuracy {Horizontal = 6, Vertical = 6};
+            LoadAccuracySettitng();
 
             Accuracy = new AccuracyViewModel(dispatcher)
             {
@@ -30,6 +32,7 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         [UsedImplicitly]
         public AccuracyViewModel Accuracy { get; private set; }
+
         [UsedImplicitly]
         public bool HasChanges
         {
@@ -44,8 +47,7 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         private void AccuracyOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            HasChanges = Math.Abs(_initialAccuracy.Horizontal - Accuracy.Horizontal) > Double.Epsilon ||
-                         Math.Abs(_initialAccuracy.Vertical - Accuracy.Vertical) > Double.Epsilon;
+            UpdateHasChanges();
         }
 
         [UsedImplicitly]
@@ -56,12 +58,49 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         private void ResetChanges()
         {
-            throw new System.NotImplementedException();
+            Accuracy.Horizontal = _initialAccuracy.Horizontal;
+            Accuracy.Vertical = _initialAccuracy.Vertical;
         }
 
         private void ApplyChanges()
         {
-            throw new System.NotImplementedException();
+            _initialAccuracy.Horizontal = Accuracy.Horizontal;
+            _initialAccuracy.Vertical = Accuracy.Vertical;
+
+            SaveAccuracySettings();
+            UpdateHasChanges();
+        }
+
+        private void UpdateHasChanges()
+        {
+            HasChanges = Math.Abs(_initialAccuracy.Horizontal - Accuracy.Horizontal) > Double.Epsilon ||
+                         Math.Abs(_initialAccuracy.Vertical - Accuracy.Vertical) > Double.Epsilon;
+        }
+
+        private void SaveAccuracySettings()
+        {
+            var settings = ApplicationData.Current.LocalSettings;
+            settings.Values["Accruacy.Horizontal"] = _initialAccuracy.Horizontal;
+            settings.Values["Accuracy.Vertical"] = _initialAccuracy.Vertical;
+        }
+
+        private void LoadAccuracySettitng()
+        {
+            var settings = ApplicationData.Current.LocalSettings;
+
+            var horizontalAccuracy = settings.Values["Accruacy.Horizontal"];
+            if (horizontalAccuracy == null)
+            {
+                settings.Values["Accruacy.Horizontal"] = horizontalAccuracy = 6.0d;
+            }
+
+            var verticalAccuracy = settings.Values["Accuracy.Vertical"];
+            if (verticalAccuracy == null)
+            {
+                settings.Values["Accruacy.Vertical"] = verticalAccuracy = 6.0d;
+            }
+
+            _initialAccuracy  = new Accuracy { Horizontal = (double)horizontalAccuracy, Vertical = (double)verticalAccuracy};
         }
     }
 }
