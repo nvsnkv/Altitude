@@ -40,8 +40,6 @@
     <Compile Include="Accuracy.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\IExporter.cs" />
-    <Compile Include="Storage\StorageManager.cs" />
     <Compile Include="Tracking\ITracker.cs" />
     <Compile Include="Tracking\PositionChangedEventArgs.cs" />
     <Compile Include="Tracking\TrackerState.cs" />
