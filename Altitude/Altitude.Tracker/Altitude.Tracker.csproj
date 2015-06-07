@@ -99,7 +99,6 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\Exporter.cs" />
     <Compile Include="Storage\LocalStorage.cs" />
     <Compile Include="Tracking\WPTracker.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="ViewModels\RightNow\TrackerViewModel.cs" />
     <Compile Include="ViewModels\Settings\AccuracyViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\StorageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\RightNowView.xaml.cs">
       <DependentUpon>RightNowView.xaml</DependentUpon>

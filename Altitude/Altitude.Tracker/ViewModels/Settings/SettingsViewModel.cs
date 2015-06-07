@@ -30,11 +30,16 @@ namespace Altitude.Tracker.ViewModels.Settings
                 Vertical = _storage.DesiredAccuracy.Vertical
             };
 
+            Storage = new StorageViewModel(storage,dispatcher);
+
             Accuracy.PropertyChanged += AccuracyOnPropertyChanged;
         }
 
         [UsedImplicitly]
         public AccuracyViewModel Accuracy { get; private set; }
+
+        [UsedImplicitly]
+        public StorageViewModel Storage { get; private set; }
 
         [UsedImplicitly]
         public bool HasChanges

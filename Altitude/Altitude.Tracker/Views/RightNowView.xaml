@@ -20,7 +20,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="0" Grid.Column="0">
@@ -61,10 +60,6 @@
             <Run>Tracker state: </Run>
             <Run Text="{Binding Tracker.State, FallbackValue=DataUnavailable}"/>
         </TextBlock>
-        
-        <ToggleButton Grid.Row="6" Grid.ColumnSpan="2" IsChecked="{Binding Tracker.IsEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch">
-            Track
-        </ToggleButton>
     </Grid>
 </PivotItem>
 

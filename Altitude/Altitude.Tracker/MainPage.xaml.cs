@@ -32,7 +32,8 @@ namespace Altitude.Tracker
             NavigationCacheMode = NavigationCacheMode.Required;
 
             var tracker = new WPTracker();
-            var storage = new LocalStorage(new Accuracy(1,1));
+            var storage = new LocalStorage(tracker, new Accuracy(1,1));
+            
             DataContext = new MainViewModel(storage, tracker, Dispatcher);
         }
 

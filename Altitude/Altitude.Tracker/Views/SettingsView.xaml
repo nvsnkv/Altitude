@@ -59,12 +59,12 @@
             <Run Text="{Binding Storage.Count, FallbackValue=0}" />
         </TextBlock>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <HyperlinkButton Command="{Binding Storage.Export}">
+            <HyperlinkButton Command="{Binding Storage.Export}" Visibility="{Binding Storage.CanExport, Converter={StaticResource BoolToVisibilityConverter}}">
                 <TextBlock Style="{StaticResource BaseTextBlockStyle}">
                     <Underline>export data</Underline>
                 </TextBlock>
             </HyperlinkButton>
-            <HyperlinkButton Command="{Binding Storage.Clear}" Margin="5 0">
+            <HyperlinkButton Command="{Binding Storage.Clear}" Margin="5 0" Visibility="{Binding Storage.CanClear, Converter={StaticResource BoolToVisibilityConverter}}">
                 <TextBlock Style="{StaticResource BaseTextBlockStyle}">
                     <Underline>clear</Underline>
                 </TextBlock>

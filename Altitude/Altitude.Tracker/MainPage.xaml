@@ -9,8 +9,17 @@
     xmlns:views="using:Altitude.Tracker.Views"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Pivot Title="ALTITUDE">
-        <views:RightNowView DataContext="{Binding RightNow}"/>
-        <views:SettingsView DataContext="{Binding Settings}"/>
-    </Pivot>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Pivot Title="ALTITUDE">
+            <views:RightNowView DataContext="{Binding RightNow}"/>
+            <views:SettingsView DataContext="{Binding Settings}"/>
+        </Pivot>
+        <ToggleButton Grid.Row="1" IsChecked="{Binding RightNow.Tracker.IsEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch">
+            Track
+        </ToggleButton>
+    </Grid>
 </Page>
