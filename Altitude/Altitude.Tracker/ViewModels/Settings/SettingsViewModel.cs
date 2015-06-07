@@ -64,8 +64,7 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         private void ApplyChanges()
         {
-            _initialAccuracy.Horizontal = Accuracy.Horizontal;
-            _initialAccuracy.Vertical = Accuracy.Vertical;
+            _initialAccuracy = new Accuracy(Accuracy.Horizontal, Accuracy.Vertical);
 
             SaveAccuracySettings();
             UpdateHasChanges();
@@ -100,7 +99,7 @@ namespace Altitude.Tracker.ViewModels.Settings
                 settings.Values["Accruacy.Vertical"] = verticalAccuracy = 6.0d;
             }
 
-            _initialAccuracy  = new Accuracy { Horizontal = (double)horizontalAccuracy, Vertical = (double)verticalAccuracy};
+            _initialAccuracy  = new Accuracy((double)horizontalAccuracy, (double)verticalAccuracy);
         }
     }
 }

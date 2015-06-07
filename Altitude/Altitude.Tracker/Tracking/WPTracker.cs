@@ -86,11 +86,7 @@ namespace Altitude.Tracker.Tracking
                 Altitude = geocoordinate.Point.Position.Altitude,
                 Timestamp = geocoordinate.Timestamp.LocalDateTime,
 
-                Accuracy = new Accuracy
-                {
-                    Horizontal = geocoordinate.Accuracy,
-                    Vertical = geocoordinate.AltitudeAccuracy ?? double.PositiveInfinity
-                }
+                Accuracy = new Accuracy(geocoordinate.Accuracy, geocoordinate.AltitudeAccuracy ?? double.PositiveInfinity)
             };
         }
 
