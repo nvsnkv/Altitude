@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Header="Settings">
+    Header="Manage">
     
     <StackPanel>
         <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Desired accuracy</TextBlock>
@@ -53,18 +53,22 @@
             </HyperlinkButton>
         </StackPanel>
 
-        <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Storage</TextBlock>
+        <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Local storage</TextBlock>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}">
             <Run>Measurements count: </Run>
             <Run Text="{Binding Storage.Count, FallbackValue=0}" />
         </TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding Storage.Export}">
-                Export data
-            </Button>
-            <Button Command="{Binding Storage.Clear}" Margin="5 0">
-                Clear
-            </Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <HyperlinkButton Command="{Binding Storage.Export}">
+                <TextBlock Style="{StaticResource BaseTextBlockStyle}">
+                    <Underline>export data</Underline>
+                </TextBlock>
+            </HyperlinkButton>
+            <HyperlinkButton Command="{Binding Storage.Clear}" Margin="5 0">
+                <TextBlock Style="{StaticResource BaseTextBlockStyle}">
+                    <Underline>clear</Underline>
+                </TextBlock>
+            </HyperlinkButton>
         </StackPanel>
     </StackPanel>
 </PivotItem>
