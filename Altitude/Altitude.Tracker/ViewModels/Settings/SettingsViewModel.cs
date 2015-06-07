@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Altitude.Domain;
 using Altitude.Tracker.Annotations;
 using Altitude.Tracker.Commands;
+using Altitude.Tracker.Storage;
 
 namespace Altitude.Tracker.ViewModels.Settings
 {
@@ -15,16 +16,18 @@ namespace Altitude.Tracker.ViewModels.Settings
         private bool _hasChanges;
         private ICommand _applyCommand;
         private ICommand _resetCommand;
-        private Accuracy _initialAccuracy;
+        private readonly LocalStorage _storage;
 
-        public SettingsViewModel([NotNull] CoreDispatcher dispatcher) : base(dispatcher)
+        public SettingsViewModel([NotNull] LocalStorage storage, [NotNull] CoreDispatcher dispatcher) : base(dispatcher)
         {
+            if (storage == null) throw new ArgumentNullException(nameof(storage));
+            _storage = storage;
             LoadAccuracySettitng();
 
             Accuracy = new AccuracyViewModel(dispatcher)
             {
-                Horizontal = _initialAccuracy.Horizontal,
-                Vertical = _initialAccuracy.Vertical
+                Horizontal =_storage.DesiredAccuracy.Horizontal,
+                Vertical = _storage.DesiredAccuracy.Vertical
             };
 
             Accuracy.PropertyChanged += AccuracyOnPropertyChanged;
@@ -58,13 +61,13 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         private void ResetChanges()
         {
-            Accuracy.Horizontal = _initialAccuracy.Horizontal;
-            Accuracy.Vertical = _initialAccuracy.Vertical;
+            Accuracy.Horizontal = _storage.DesiredAccuracy.Horizontal;
+            Accuracy.Vertical = _storage.DesiredAccuracy.Vertical;
         }
 
         private void ApplyChanges()
         {
-            _initialAccuracy = new Accuracy(Accuracy.Horizontal, Accuracy.Vertical);
+            _storage.DesiredAccuracy = new Accuracy(Accuracy.Horizontal, Accuracy.Vertical);
 
             SaveAccuracySettings();
             UpdateHasChanges();
@@ -72,15 +75,15 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         private void UpdateHasChanges()
         {
-            HasChanges = Math.Abs(_initialAccuracy.Horizontal - Accuracy.Horizontal) > Double.Epsilon ||
-                         Math.Abs(_initialAccuracy.Vertical - Accuracy.Vertical) > Double.Epsilon;
+            HasChanges = Math.Abs(_storage.DesiredAccuracy.Horizontal - Accuracy.Horizontal) > Double.Epsilon ||
+                         Math.Abs(_storage.DesiredAccuracy.Vertical - Accuracy.Vertical) > Double.Epsilon;
         }
 
         private void SaveAccuracySettings()
         {
             var settings = ApplicationData.Current.LocalSettings;
-            settings.Values["Accruacy.Horizontal"] = _initialAccuracy.Horizontal;
-            settings.Values["Accuracy.Vertical"] = _initialAccuracy.Vertical;
+            settings.Values["Accruacy.Horizontal"] = _storage.DesiredAccuracy.Horizontal;
+            settings.Values["Accuracy.Vertical"] = _storage.DesiredAccuracy.Vertical;
         }
 
         private void LoadAccuracySettitng()
@@ -99,7 +102,7 @@ namespace Altitude.Tracker.ViewModels.Settings
                 settings.Values["Accruacy.Vertical"] = verticalAccuracy = 6.0d;
             }
 
-            _initialAccuracy  = new Accuracy((double)horizontalAccuracy, (double)verticalAccuracy);
+            _storage.DesiredAccuracy = new Accuracy((double)horizontalAccuracy, (double)verticalAccuracy);
         }
     }
 }

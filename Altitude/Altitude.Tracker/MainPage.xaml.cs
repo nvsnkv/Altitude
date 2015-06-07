@@ -11,6 +11,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Altitude.Domain;
+using Altitude.Tracker.Storage;
 using Altitude.Tracker.Tracking;
 using Altitude.Tracker.ViewModels;
 
@@ -30,7 +32,8 @@ namespace Altitude.Tracker
             NavigationCacheMode = NavigationCacheMode.Required;
 
             var tracker = new WPTracker();
-            DataContext = new MainViewModel(tracker, Dispatcher);
+            var storage = new LocalStorage(new Accuracy(1,1));
+            DataContext = new MainViewModel(storage, tracker, Dispatcher);
         }
 
         /// <summary>
