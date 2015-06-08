@@ -53,6 +53,9 @@
             </HyperlinkButton>
         </StackPanel>
 
+        <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Application behaviour</TextBlock>
+        <CheckBox IsChecked="{Binding PreventLockScreen, Mode=TwoWay}">Prevent lock screen</CheckBox>
+        
         <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}">Local storage</TextBlock>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}">
             <Run>Measurements count: </Run>

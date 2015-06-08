@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Windows.Storage;
+using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Altitude.Domain;
@@ -14,9 +15,13 @@ namespace Altitude.Tracker.ViewModels.Settings
     public class SettingsViewModel:ViewModelBase
     {
         private bool _hasChanges;
+        private bool _preventLockScreen;
+
         private ICommand _applyCommand;
         private ICommand _resetCommand;
+
         private readonly LocalStorage _storage;
+        private DisplayRequest _displayRequest;
 
         public SettingsViewModel([NotNull] LocalStorage storage, [NotNull] CoreDispatcher dispatcher) : base(dispatcher)
         {
@@ -40,6 +45,30 @@ namespace Altitude.Tracker.ViewModels.Settings
 
         [UsedImplicitly]
         public StorageViewModel Storage { get; private set; }
+
+        [UsedImplicitly]
+        public bool PreventLockScreen
+        {
+            get { return _preventLockScreen; }
+            set
+            {
+                if (value == _preventLockScreen) return;
+                _preventLockScreen = value;
+
+                if (_preventLockScreen)
+                {
+                    _displayRequest = new DisplayRequest();
+                    _displayRequest.RequestActive();
+                }
+                else
+                {
+                    _displayRequest.RequestRelease();
+                    _displayRequest = null;
+                }
+
+                RaisePropertyChanged();
+            }
+        }
 
         [UsedImplicitly]
         public bool HasChanges
