@@ -15,5 +15,14 @@ namespace Altitude.Domain
         public Accuracy Accuracy;
 
         public DateTime Timestamp;
+
+        public bool Equals(Position other, bool ignoreTimestamp)
+        {
+            return Math.Abs(Latitude - other.Latitude) < double.Epsilon
+                   && Math.Abs(Longitude - other.Longitude) < double.Epsilon
+                   && Math.Abs(Altitude - other.Altitude) < double.Epsilon
+                   && Accuracy.Equals(other.Accuracy)
+                   && (ignoreTimestamp || Timestamp.Equals(other.Timestamp));
+        }
     }
 }

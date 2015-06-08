@@ -26,6 +26,7 @@ namespace Altitude.Tracker.Storage
         private Accuracy _desiredAccuracy;
         private StorageFile _blob;
         private StorageFile _counter;
+        private Position _lastPosition = new Position {Accuracy = new Accuracy(-1, -1)};
 
         public Accuracy DesiredAccuracy
         {
@@ -129,14 +130,17 @@ namespace Altitude.Tracker.Storage
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         }
 
         private void TrackerOnPositionChanged(object sender, PositionChangedEventArgs e)
         {
             if (e.Position.Accuracy.CompareTo(DesiredAccuracy) <= 0)
             {
-                Add(e.Position);
+                if (!_lastPosition.Equals(e.Position, true))
+                {
+                    Add(e.Position);
+                    _lastPosition = e.Position;
+                }
             }
         }
 
