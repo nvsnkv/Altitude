@@ -25,6 +25,26 @@ namespace Altitude.Domaint.Unit.Tests
             Assert.That(someAccuracy.CompareTo(new Accuracy(2, 2)), Is.EqualTo(0)); // equals
             Assert.That(someAccuracy.CompareTo(new Accuracy(1.9, 1.50)), Is.EqualTo(1)); // greater
         }
+
+        [Test]
+        public void BePrintable()
+        {
+            var someAccuracy = new Accuracy(2, 2);
+            Assert.That(someAccuracy.ToString(), Is.EqualTo(@"""2"",""2"""));
+        }
+
+        [Test]
+        public void BeParseable()
+        {
+            const string ACCURACY_STRING = @"""2"",""2""";
+            var expected = new Accuracy(2,2);
+            Accuracy actual;
+
+            var result = Accuracy.TryParse(ACCURACY_STRING, out actual);
+
+            Assert.That(result, Is.True);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 
 }
