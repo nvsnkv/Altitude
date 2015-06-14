@@ -31,5 +31,10 @@ namespace Altitude.Domain
         {
             return Math.Sqrt(Horizontal * Horizontal + Vertical * Vertical);
         }
+
+        public override string ToString()
+        {
+            return $@"""{Horizontal}"",""{Vertical}""";
+        }
     }
 }
