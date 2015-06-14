@@ -159,7 +159,7 @@ namespace Altitude.Tracker.Storage
 
         private async void Add(Position position)
         {
-            var line = $"'{position.Timestamp.ToUniversalTime()}','{position.Latitude}','{position.Longitude}','{position.Altitude}','{position.Accuracy.Horizontal}''{position.Accuracy.Vertical}'";
+            var line = position + Environment.NewLine;
             await FileIO.AppendTextAsync(_blob, line);
             await FileIO.WriteTextAsync(_counter, (Count += 1).ToString());
         }

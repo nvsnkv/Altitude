@@ -24,5 +24,10 @@ namespace Altitude.Domain
                    && Accuracy.Equals(other.Accuracy)
                    && (ignoreTimestamp || Timestamp.Equals(other.Timestamp));
         }
+
+        public override string ToString()
+        {
+            return $@"""{Timestamp}"",""{Latitude}"",""{Longitude}"",""{Altitude}"",{Accuracy}";
+        }
     }
 }
